@@ -254,7 +254,11 @@ void ARCIO::read2DGrid_internal(Grid2DObject& grid_out, const std::string& full_
 }
 
 void ARCIO::read2DGrid(Grid2DObject& grid_out, const std::string& filename) {
+#if defined(__CYGWIN__)
+	read2DGrid_internal(grid_out, grid2dpath_in+filename);
+#else
 	read2DGrid_internal(grid_out, grid2dpath_in+"/"+filename);
+#endif
 }
 
 void ARCIO::read2DGrid(Grid2DObject& grid_out, const MeteoGrids::Parameters& parameter, const Date& date)
